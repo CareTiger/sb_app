@@ -1,0 +1,55 @@
+{
+  "name": "smitavadlamani-supabase",
+  "private": true,
+  "version": "1.0.0",
+  "description": "supabase edge functions for smita's website",
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
+  "scriptsComments": {
+    "PRISMA COMMENTS": "*** META SCRIPTS ***",
+    "reset": "Resets the database and runs the prisma meta scripts",
+    "prisma": "meta script that Runs the privileges, rls, and functions/triggers scripts",
+    "prisma:realtime": "enables realtime on the notification table",
+    "prisma:storage": "Creates a storage bucket and adds a policies to the bucket",
+    "SUPABASE COMMENTS": "*** START/STOP/GENERATE_TYPES ***",
+    "sb:restart": "reboots the supabase docker container",
+    "sb:start": "starts the supabase docker container",
+    "sb:stop": "stops the supabase docker container and creates a backup",
+    "sb:types": "creates data types for the supabase client. makes two copies. one in the supabase folder and one in the App folder",
+    "sb:serve": "serves edge functions locally using .env.local"
+  },
+  "scripts": {
+    "postinstall": "prisma generate",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,md,json}\"",
+    "sb:stop": "npx env-cmd npx supabase stop --backup",
+    "sb:start": "npx env-cmd npx supabase start",
+    "sb:restart": "npm run sb:stop && npm run sb:start",
+    "sb:types": "npx supabase gen types typescript --local tb > ./types/db_types.ts && npx supabase gen types typescript --local tb > ../App/types/db_types.ts",
+    "sb:serve": "supabase functions serve --import-map ./supabase/functions/import_map.json --env-file ./supabase/.env.local",
+    "sb:set-secrets": "supabase secrets set --env-file ./supabase/.env",
+    "prisma:privileges": "npx prisma db execute --file ./prisma/sql/privileges.sql --schema ./prisma/schema.prisma",
+    "prisma:rls": "npx prisma db execute --file ./prisma/sql/rls.sql --schema ./prisma/schema.prisma",
+    "prisma:triggers": "npx prisma db execute --file ./prisma/sql/triggers.sql --schema ./prisma/schema.prisma",
+    "prisma:functions": "npx prisma db execute --file ./prisma/sql/functions.sql --schema ./prisma/schema.prisma",
+    "prisma:reset": "npx prisma db push  && npm run prisma:privileges && npm run prisma:rls && npm run prisma:triggers && npm run sb:types && npx prisma db seed"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.3",
+    "@typescript-eslint/eslint-plugin": "^5.59.2",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-standard-with-typescript": "^34.0.1",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-vue": "^9.11.0",
+    "prettier": "2.8.8",
+    "prisma": "^4.13.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.13.0"
+  }
+}

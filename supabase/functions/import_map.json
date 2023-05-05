@@ -1,0 +1,20 @@
+{
+  "imports": {
+    "cors": "../_shared/cors.ts",
+    "server": "https://deno.land/std@0.168.0/http/server.ts",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.7.1",
+    "zod": "https://esm.sh/zod?dts",
+    "url_pattern": "https://esm.sh/url-pattern",
+    "assert": "https://deno.land/std@0.184.0/testing/asserts.ts",
+    "lodash": "https://cdn.skypack.dev/lodash",
+    "denomailer": "https://deno.land/x/denomailer@0.12.0/mod.ts",
+    "oak": "https://deno.land/x/oak@v11.1.0/mod.ts",
+    "og_edge": "https://deno.land/x/og_edge@0.0.4/mod.ts",
+    "openai": "https://esm.sh/openai@3.1.0",
+    "stripe": "https://esm.sh/stripe@11.1.0?target=deno",
+    "sift": "https://deno.land/x/sift@0.6.0/mod.ts",
+    "postgres": "https://deno.land/x/postgres@v0.17.0/mod.ts",
+    "puppeteer": "https://deno.land/x/puppeteer@16.2.0/mod.ts",
+    "kysely": "https://esm.sh/kysely@0.23.4"
+  }
+}
